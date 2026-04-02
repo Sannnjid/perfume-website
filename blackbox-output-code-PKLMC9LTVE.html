@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxuria Perfumes - Discover Your Signature Scent</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #d4af37;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #d4af37;
+        }
+
+        .cart-btn {
+            background: #d4af37;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cart-btn:hover {
+            background: #b8942f;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23f8f4f0" width="1200" height="800"/><circle fill="%23d4af37" opacity="0.1" cx="200" cy="200" r="150"/><circle fill="%23e6b800" opacity="0.05" cx="1000" cy="600" r="200"/><path fill="%23f5e6cc" opacity="0.3" d="M0 400 Q300 200 600 400 T1200 400 V800 H0 Z"/></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.5s forwards;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.8s forwards;
+        }
+
+        .cta-buttons {
+            opacity: 0;
+            animation: fadeInUp 1s ease 1s forwards;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            margin: 0 1rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .cta-primary {
+            background: #d4af37;
+            color: white;
+        }
+
+        .cta-primary:hover {
+            background: transparent;
+            border-color: #d4af37;
+            color: #d4af37;
+            transform: translateY(-3px);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: white;
+            border-color: white;
+        }
+
+        .cta-secondary:hover {
+            background: white;
+            color: #333;
+            transform: translateY(-3px);
+        }
+
+        /* Products Section */
+        .products {
+            padding: 100px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 4rem;
+            color: #333;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+        }
+
+        .product-image {
+            height: 300px;
+            background: linear-gradient(45deg, #f8f4f0, #e8d8b0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #d4af37;
+        }
+
+        .product-info {
+            padding: 2rem;
+        }
+
+        .product-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .product-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #d4af37;
+            margin-bottom: 1rem;
+        }
+
+        .product-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            background: linear-gradient(45deg, #d4af37, #e6b800);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            transform: scale(1.05);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 2rem;
+            background: #f8f4f0;
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .feature i {
+            font-size: 3rem;
+            color: #d4af37;
+            margin-bottom: 1rem;
+        }
+
+        .feature h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 1rem;
+            color: #d4af37;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            color: #666;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-btn {
+                margin: 0.5rem 0;
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        /* Cart Modal */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .cart-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .close-cart {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#" class="logo">Luxuria</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Shop</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="cart-btn" onclick="openCart()">
+                <i class="fas fa-shopping-bag"></i>
+                Cart (0)
+            </button>
+            <div class="mobile-menu" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Discover Your Signature Scent</h1>
+            <p>Experience the art of perfumery with our exclusive collection of luxurious fragrances crafted for the discerning individual.</p>
+            <div class="cta-buttons">
+                <a href="#products" class="cta-btn cta-primary">Shop Collection</a>
+                <a href="#about" class="cta-btn cta-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <h2 class="section-title">Our Collection</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">
+                    <i class="fas fa-spray-can"></i>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Aurora Bloom</h3>
+                    <div class="product-price">$129</div>
+                    <p class="product-description">A floral masterpiece with notes of jasmine, rose, and vanilla. Perfect for daytime elegance.</p>
+                    <button class="add-to-cart" onclick="addToCart('Aurora Bloom', 129)">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <i class="fas fa-fire"></i>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Midnight Ember</h3>
+                    <div class="product-price">$149</div>
+                    <p class="product-description">A sensual oriental fragrance with amber, oud, and spices. Ideal for evening allure.</p>
+                    <button class="add-to-cart" onclick="addToCart('Midnight Ember', 149)">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Verdant Whisper</h3>
+                    <div class="product-price">$119</div>
+                    <p class="product-description">Fresh green notes of vetiver, basil, and citrus. A breath of nature in every spray.</p>
+                    <button class="add-to-cart" onclick="addToCart('Verdant Whisper', 119)">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <i class="fas fa-gem"></i>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Crystal Veil</h3>
+                    <div class="product-price">$169</div>
+                    <p class="product-description">Rare oud, saffron, and white musk create an aura of mystery and sophistication.</p>
+                    <button class="add-to-cart" onclick="addToCart('Crystal Veil', 169)">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="features-grid">
+            <div class="feature">
+                <i class="fas fa-seedling"></i>
+                <h3>Natural Ingredients</h3>
+                <p>Crafted with the finest essential oils and rare ingredients from around the world.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-shipping-fast"></i>
+                <h3>Free Shipping</h3>
+                <p>Complimentary worldwide shipping on all orders over $100.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-undo"></i>
+                <h3>30-Day Guarantee</h3>
+                <p>Not completely satisfied? Return within 30 days for a full refund.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-award"></i>
+                <h3>Award Winning</h3>
+                <p>Recognized by fragrance experts worldwide for excellence in perfumery.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Luxuria</h3>
+                <p>Elevating the art of perfumery since 2024. Discover scents that tell your story.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#" style="color: #ccc; text-decoration: none;">Shop</a></li>
+                    <li><a href="#" style="color: #ccc; text-decoration: none;">About</a></li>
+                    <li><a href="#" style="color: #ccc; text-decoration: none;">Contact</a></li>
+                    <li><a href="#" style="color: #ccc; text-decoration: none;">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Customer Care</h3>
+                <ul>
+                    <li><a href="#" style="color: #ccc; text-decoration: none;">Shipping</a></li>
+                    <li><a href="#" style="color: #ccc; text-decoration: none;">Returns</a></li>
+                    <li><a href="#" style="color: #ccc; text-decoration: none;">Privacy</a></li>
+                    <li><a href="#" style="color: #ccc; text-decoration: none;">Terms</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                    <i class="fab fa-instagram" style="font-size: 1.5rem; color: #ccc;"></i>
+                    <i class="fab fa-facebook" style="font-size: 1.5rem; color: #ccc;"></i>
+                    <i class="fab fa-twitter" style="font-size: 1.5rem; color: #ccc;"></
